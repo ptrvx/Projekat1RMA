@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Category;
+import rs.edu.raf.rma.pvukovic16_projekat1.model.Expense;
 import rs.edu.raf.rma.pvukovic16_projekat1.util.Util;
 
 public class MainViewModel extends ViewModel {
@@ -15,12 +16,24 @@ public class MainViewModel extends ViewModel {
     MutableLiveData<List<Category>> categories = new MutableLiveData<>();
     List<Category> categoryList = new ArrayList<>();
 
+    MutableLiveData<List<Expense>> expenses = new MutableLiveData<>();
+    List<Expense> expenseList = new ArrayList<>();
+
     public MainViewModel() {
 
     }
 
     public LiveData<List<Category>> getCategories() {
         return categories;
+    }
+
+    public LiveData<List<Expense>> getExpenses() {
+        return expenses;
+    }
+
+    public void addExpense(Expense x) {
+        expenseList.add(x);
+        expenses.setValue(expenseList);
     }
 
     public boolean addCategory(String newCat) {

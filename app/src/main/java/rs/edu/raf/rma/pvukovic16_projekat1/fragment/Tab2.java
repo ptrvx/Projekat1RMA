@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,27 +16,25 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import rs.edu.raf.rma.pvukovic16_projekat1.R;
 import rs.edu.raf.rma.pvukovic16_projekat1.adapter.CategoryAdapter;
+import rs.edu.raf.rma.pvukovic16_projekat1.adapter.ExpenseAdapter;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Category;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Expense;
-import rs.edu.raf.rma.pvukovic16_projekat1.util.Util;
 import rs.edu.raf.rma.pvukovic16_projekat1.viewmodel.MainViewModel;
 
-public class Tab1 extends Fragment {
-
-    private static final String ARG_SECTION_NUMBER = "section_1";
+public class Tab2 extends Fragment {
 
     private MainViewModel mainViewModel;
-    private List<Category> categoryList;
-    private ArrayAdapter<Category> arrayAdapter;
+    private ExpenseAdapter expenseAdapter;
+    private List<Expense> expenseList;
 
-    public static Tab1 newInstance() {
-        Tab1 fragment = new Tab1();
+
+    public static Tab2 newInstance() {
+        Tab2 fragment = new Tab2();
         return fragment;
     }
 
@@ -46,51 +42,51 @@ public class Tab1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
     }
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment1, container, false);
+        View root = inflater.inflate(R.layout.fragment2, container, false);
 
-        EditText nameText = root.findViewById(R.id.t1_et_name);
-        EditText costText = root.findViewById(R.id.t1_et_cost);
-        Button button = root.findViewById(R.id.t1_btn_add);
-        Spinner spinner = root.findViewById(R.id.t1_spinner);
+        EditText searchText = root.findViewById(R.id.t2_et_search);
+        Spinner spinner = root.findViewById(R.id.t2_spinner);
+        Button apply = root.findViewById(R.id.t2_btn_apply);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = nameText.getText().toString();
-                String cost = costText.getText().toString();
                 Category cat = (Category)spinner.getSelectedItem();
+                if (cat != null) {
 
-                if (!name.equals("") && !cost.equals("") && cat != null) {
-                    mainViewModel.addExpense(new Expense(Util.generateId(), name, Integer.parseInt(cost), cat));
                 }
-
             }
         });
 
-        arrayAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_spinner_item, categoryList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(arrayAdapter);
+        RecyclerView recyclerView = root.findViewById(R.id.t2_rv_exp_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        expenseAdapter = new ExpenseAdapter();
+
+        recyclerView.setAdapter(expenseAdapter);
 
         return root;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
-        mainViewModel.getCategories().observe(getViewLifecycleOwner(),
-                new Observer<List<Category>>() {
+        mainViewModel.getExpenses().observe(getViewLifecycleOwner(),
+                new Observer<List<Expense>>() {
                     @Override
-                    public void onChanged(List<Category> categories) {
-                        categoryList = new ArrayList<>(categories);
-                        arrayAdapter.notifyDataSetChanged();
+                    public void onChanged(List<Expense> expenses) {
+                        expenseList = new ArrayList<>(expenses);
+                        expenseAdapter.setData(expenseList);
                     }
                 });
     }

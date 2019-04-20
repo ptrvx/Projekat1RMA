@@ -18,9 +18,5 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
-    <TextView
-        android:text="aiorjrjrjrjrjrjrjrjrjrjrjraijoeiojaeijoreaijoearijoraereaijoreaijo\n\ropraeporeapjorea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
