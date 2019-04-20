@@ -21,6 +21,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
 
     private List<Expense> expenseList;
 
+    private OnImageClickCallback mOnImageClickCallback;
+    private OnItemRemoveCallback mOnItemRemoveCallback;
+
     public ExpenseAdapter() {
         expenseList = new ArrayList<>();
     }
@@ -51,6 +54,28 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         result.dispatchUpdatesTo(this);
     }
 
+
+
+    public void setOnImageClickCallback(OnImageClickCallback onImageClickCallback){
+        mOnImageClickCallback = onImageClickCallback;
+    }
+
+    public void setOnItemRemoveCallback (OnItemRemoveCallback onItemRemoveCallback) {
+        mOnItemRemoveCallback = onItemRemoveCallback;
+    }
+
+    // Callback we use when user clicks on remove
+    public interface OnItemRemoveCallback {
+        void onItemRemove(int position);
+    }
+
+    //Callback we use when user click on avatar avatarImage
+    public interface OnImageClickCallback {
+        void onImageClick();
+    }
+
+
+
     @Override
     public int getItemCount() {
         return expenseList.size();
@@ -69,7 +94,20 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
             cost = itemView.findViewById(R.id.t2_tv_cost);
             cat = itemView.findViewById(R.id.t2_tv_cat);
             date = itemView.findViewById(R.id.t2_tv_date);
+
             rmbtn = itemView.findViewById(R.id.t2_btn_apply);
+            rmbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        if (mOnItemRemoveCallback != null) {
+                            mOnItemRemoveCallback.onItemRemove(position);
+                        }
+                    }
+                }
+            });
+
 
         }
     }

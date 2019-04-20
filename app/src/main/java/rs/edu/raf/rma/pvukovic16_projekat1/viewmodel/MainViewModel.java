@@ -19,6 +19,8 @@ public class MainViewModel extends ViewModel {
     MutableLiveData<List<Expense>> expenses = new MutableLiveData<>();
     List<Expense> expenseList = new ArrayList<>();
 
+    Category catFilter = null;
+
     public MainViewModel() {
 
     }
@@ -34,6 +36,25 @@ public class MainViewModel extends ViewModel {
     public void addExpense(Expense x) {
         expenseList.add(x);
         expenses.setValue(expenseList);
+    }
+
+
+    public void setFilter(String filter) {
+        filter = filter.toLowerCase();
+        List<Expense> filteredList = new ArrayList<>();
+        for (Expense ex: expenseList) {
+            if(ex.getName().toLowerCase().startsWith(filter)){
+                if (catFilter == null || ex.getCategory().getName().equals(catFilter.getName())) {
+                    filteredList.add(ex);
+                }
+            }
+        }
+        expenses.setValue(filteredList);
+    }
+
+
+    public void setCatFilter(Category catFilter) {
+        this.catFilter = catFilter;
     }
 
     public boolean addCategory(String newCat) {

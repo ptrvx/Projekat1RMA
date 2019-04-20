@@ -1,12 +1,15 @@
 package rs.edu.raf.rma.pvukovic16_projekat1.fragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,13 +58,26 @@ public class Tab2 extends Fragment {
         Spinner spinner = root.findViewById(R.id.t2_spinner);
         Button apply = root.findViewById(R.id.t2_btn_apply);
 
+
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String filter = searchText.getText().toString();
+                mainViewModel.setFilter(filter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Category cat = (Category)spinner.getSelectedItem();
-                if (cat != null) {
-
-                }
+                mainViewModel.setCatFilter(cat);
             }
         });
 
@@ -69,6 +85,14 @@ public class Tab2 extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext());
         recyclerView.setLayoutManager(layoutManager);
         expenseAdapter = new ExpenseAdapter();
+
+
+        expenseAdapter.setOnItemRemoveCallback(new ExpenseAdapter.OnItemRemoveCallback() {
+            @Override
+            public void onItemRemove(int position) {
+                Toast.makeText(root.getContext(), "Remove expense on position " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         recyclerView.setAdapter(expenseAdapter);
 
