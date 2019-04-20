@@ -1,4 +1,4 @@
-package rs.edu.raf.rma.pvukovic16_projekat1.ui.main;
+package rs.edu.raf.rma.pvukovic16_projekat1.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import rs.edu.raf.rma.pvukovic16_projekat1.R;
+import rs.edu.raf.rma.pvukovic16_projekat1.viewmodel.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.

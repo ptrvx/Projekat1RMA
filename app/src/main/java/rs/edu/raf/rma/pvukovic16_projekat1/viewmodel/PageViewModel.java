@@ -1,4 +1,4 @@
-package rs.edu.raf.rma.pvukovic16_projekat1.ui.main;
+package rs.edu.raf.rma.pvukovic16_projekat1.viewmodel;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
