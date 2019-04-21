@@ -103,7 +103,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         if (mOnItemRemoveCallback != null) {
-                            mOnItemRemoveCallback.onItemRemove(position);
+                            mOnItemRemoveCallback.onItemRemove(expenseList.get(position).getId());
                         }
                     }
                 }

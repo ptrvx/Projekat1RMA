@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -68,6 +69,8 @@ public class Tab1 extends Fragment {
 
                 if (!name.equals("") && !cost.equals("") && cat != null) {
                     mainViewModel.addExpense(new Expense(Util.generateId(), name, Integer.parseInt(cost), cat));
+                    Toast.makeText(root.getContext(), "Expense added - " + cost, Toast.LENGTH_SHORT).show();
+
                 }
 
             }

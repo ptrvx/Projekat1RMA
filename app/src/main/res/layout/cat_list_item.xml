@@ -8,10 +8,11 @@
 
 
     <TextView
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/bg_section"
         android:padding="8dp"
         android:id="@+id/t4_tv_cat_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     
 </LinearLayout>

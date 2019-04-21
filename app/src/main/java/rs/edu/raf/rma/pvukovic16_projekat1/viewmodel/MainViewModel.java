@@ -37,8 +37,18 @@ public class MainViewModel extends ViewModel {
     public void addExpense(Expense x) {
         expenseList.add(x);
         expenses.setValue(expenseList);
+        filterData();
     }
 
+    public void removeExpense(int id) {
+        for (int i = 0; i < expenseList.size(); ++i) {
+            if (expenseList.get(i).getId() == id) {
+                expenseList.remove(i);
+                break;
+            }
+        }
+        filterData();
+    }
 
     private void filterData() {
         List<Expense> filteredList = new ArrayList<>();
@@ -71,6 +81,7 @@ public class MainViewModel extends ViewModel {
         }
         categoryList.add(new Category(Util.generateId(), newCat));
         categories.setValue(categoryList);
+
         return true;
     }
 

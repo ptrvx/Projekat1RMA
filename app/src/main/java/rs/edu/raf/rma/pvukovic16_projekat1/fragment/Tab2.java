@@ -94,8 +94,8 @@ public class Tab2 extends Fragment {
 
         expenseAdapter.setOnItemRemoveCallback(new ExpenseAdapter.OnItemRemoveCallback() {
             @Override
-            public void onItemRemove(int position) {
-                Toast.makeText(root.getContext(), "Remove expense on position " + position, Toast.LENGTH_SHORT).show();
+            public void onItemRemove(int id) {
+                mainViewModel.removeExpense(id);
             }
         });
 
