@@ -16,6 +16,7 @@ import java.util.List;
 import rs.edu.raf.rma.pvukovic16_projekat1.R;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Expense;
 import rs.edu.raf.rma.pvukovic16_projekat1.util.ExpenseDiffCallback;
+import rs.edu.raf.rma.pvukovic16_projekat1.util.Util;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder> {
 
@@ -41,8 +42,8 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         Expense expense = expenseList.get(position);
         holder.name.setText(expense.getName());
         holder.cat.setText(expense.getCategory().toString());
-        holder.cost.setText(expense.getCost());
-        holder.date.setText(expense.getDate().toString());
+        holder.cost.setText(Integer.toString(expense.getCost()));
+        holder.date.setText(expense.getDate());
 
     }
 
@@ -53,8 +54,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         expenseList.addAll(expenses);
         result.dispatchUpdatesTo(this);
     }
-
-
 
     public void setOnImageClickCallback(OnImageClickCallback onImageClickCallback){
         mOnImageClickCallback = onImageClickCallback;
@@ -75,7 +74,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
     }
 
 
-
     @Override
     public int getItemCount() {
         return expenseList.size();
@@ -86,6 +84,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         TextView cost;
         TextView cat;
         Button rmbtn;
+        Button detbtn;
         TextView date;
 
         public ExpenseHolder(@NonNull View itemView) {
@@ -95,7 +94,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
             cat = itemView.findViewById(R.id.t2_tv_cat);
             date = itemView.findViewById(R.id.t2_tv_date);
 
-            rmbtn = itemView.findViewById(R.id.t2_btn_apply);
+            rmbtn = itemView.findViewById(R.id.t2_btn_rm);
+            detbtn = itemView.findViewById(R.id.t2_btn_details);
+
             rmbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,6 +109,17 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
                 }
             });
 
+            detbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        if (mOnImageClickCallback != null) {
+                            mOnImageClickCallback.onImageClick();
+                        }
+                    }
+                }
+            });
 
         }
     }

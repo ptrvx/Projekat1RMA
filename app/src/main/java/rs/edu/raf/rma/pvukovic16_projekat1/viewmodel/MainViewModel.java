@@ -20,6 +20,7 @@ public class MainViewModel extends ViewModel {
     List<Expense> expenseList = new ArrayList<>();
 
     Category catFilter = null;
+    String filter = null;
 
     public MainViewModel() {
 
@@ -39,8 +40,7 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public void setFilter(String filter) {
-        filter = filter.toLowerCase();
+    private void filterData() {
         List<Expense> filteredList = new ArrayList<>();
         for (Expense ex: expenseList) {
             if(ex.getName().toLowerCase().startsWith(filter)){
@@ -52,9 +52,14 @@ public class MainViewModel extends ViewModel {
         expenses.setValue(filteredList);
     }
 
+    public void setFilter(String filter) {
+        this.filter = filter.toLowerCase();
+        filterData();
+    }
 
     public void setCatFilter(Category catFilter) {
         this.catFilter = catFilter;
+        filterData();
     }
 
     public boolean addCategory(String newCat) {
@@ -64,7 +69,7 @@ public class MainViewModel extends ViewModel {
                 return false;
             }
         }
-        categoryList.add(0, new Category(Util.generateId(), newCat));
+        categoryList.add(new Category(Util.generateId(), newCat));
         categories.setValue(categoryList);
         return true;
     }

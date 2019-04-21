@@ -1,5 +1,6 @@
 package rs.edu.raf.rma.pvukovic16_projekat1.model;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ public class Expense {
     private String name;
     private int cost;
     private Category category;
-    private Date date;
+    private String date;
     private int id;
 
     public Expense(int id, String name, int cost, Category category) {
@@ -16,14 +17,14 @@ public class Expense {
         this.name = name;
         this.cost = cost;
         this.category = category;
-        this.date = new Date();
+        this.date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 
     public int getId() {
         return id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

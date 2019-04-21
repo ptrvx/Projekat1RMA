@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,6 +36,9 @@ public class Tab2 extends Fragment {
     private ExpenseAdapter expenseAdapter;
     private List<Expense> expenseList;
 
+    private ArrayAdapter<Category> arrayAdapter;
+    private List<Category> categoryList = new ArrayList<>();
+
 
     public static Tab2 newInstance() {
         Tab2 fragment = new Tab2();
@@ -58,6 +62,8 @@ public class Tab2 extends Fragment {
         Spinner spinner = root.findViewById(R.id.t2_spinner);
         Button apply = root.findViewById(R.id.t2_btn_apply);
 
+        arrayAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_1, categoryList);
+        spinner.setAdapter(arrayAdapter);
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -86,11 +92,17 @@ public class Tab2 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         expenseAdapter = new ExpenseAdapter();
 
-
         expenseAdapter.setOnItemRemoveCallback(new ExpenseAdapter.OnItemRemoveCallback() {
             @Override
             public void onItemRemove(int position) {
                 Toast.makeText(root.getContext(), "Remove expense on position " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        expenseAdapter.setOnImageClickCallback(new ExpenseAdapter.OnImageClickCallback() {
+            @Override
+            public void onImageClick() {
+
             }
         });
 
@@ -113,6 +125,15 @@ public class Tab2 extends Fragment {
                         expenseAdapter.setData(expenseList);
                     }
                 });
+
+        mainViewModel.getCategories().observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                categoryList = new ArrayList<>(categories);
+                arrayAdapter.clear();
+                arrayAdapter.addAll(categoryList);
+            }
+        });
     }
 
 }

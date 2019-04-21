@@ -34,7 +34,7 @@ public class Tab1 extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_1";
 
     private MainViewModel mainViewModel;
-    private List<Category> categoryList;
+    private List<Category> categoryList = new ArrayList<>();
     private ArrayAdapter<Category> arrayAdapter;
 
     public static Tab1 newInstance() {
@@ -73,9 +73,8 @@ public class Tab1 extends Fragment {
             }
         });
 
-        arrayAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_spinner_item, categoryList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(arrayAdapter);
+        arrayAdapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_1, categoryList);
+        spinner.setAdapter(arrayAdapter);
 
         return root;
     }
@@ -90,7 +89,8 @@ public class Tab1 extends Fragment {
                     @Override
                     public void onChanged(List<Category> categories) {
                         categoryList = new ArrayList<>(categories);
-                        arrayAdapter.notifyDataSetChanged();
+                        arrayAdapter.clear();
+                        arrayAdapter.addAll(categoryList);
                     }
                 });
     }
