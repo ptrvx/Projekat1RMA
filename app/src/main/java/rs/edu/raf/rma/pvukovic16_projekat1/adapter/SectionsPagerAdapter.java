@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import rs.edu.raf.rma.pvukovic16_projekat1.R;
-import rs.edu.raf.rma.pvukovic16_projekat1.fragment.PlaceholderFragment;
 import rs.edu.raf.rma.pvukovic16_projekat1.fragment.Tab1;
 import rs.edu.raf.rma.pvukovic16_projekat1.fragment.Tab2;
 import rs.edu.raf.rma.pvukovic16_projekat1.fragment.Tab3;
@@ -45,7 +44,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return Tab4.newInstance();
         }
 
-        return PlaceholderFragment.newInstance(position + 1);
+        return Tab3.newInstance();
     }
 
     @Nullable

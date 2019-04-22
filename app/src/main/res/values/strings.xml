@@ -7,4 +7,8 @@
     <string name="add_cat">ADD CATEGORY</string>
     <string name="add">ADD</string>
     <string name="cat_name">Category name</string>
+
+    <string name="det_cat">Kategorija: %s</string>
+    <string name="det_cost">Plaćeno %d dinara.</string>
+    <string name="det_date">Datum: %s</string>
 </resources>

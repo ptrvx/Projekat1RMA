@@ -41,6 +41,8 @@ public class MainViewModel extends ViewModel {
     }
 
     public void removeExpense(int id) {
+        if (id == -1)
+            return;
         for (int i = 0; i < expenseList.size(); ++i) {
             if (expenseList.get(i).getId() == id) {
                 expenseList.remove(i);

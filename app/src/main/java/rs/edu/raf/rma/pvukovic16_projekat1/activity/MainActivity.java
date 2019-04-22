@@ -1,4 +1,4 @@
-package rs.edu.raf.rma.pvukovic16_projekat1;
+package rs.edu.raf.rma.pvukovic16_projekat1.activity;
 
 import android.os.Bundle;
 
@@ -7,6 +7,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import rs.edu.raf.rma.pvukovic16_projekat1.R;
 import rs.edu.raf.rma.pvukovic16_projekat1.adapter.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
 
     }
 }

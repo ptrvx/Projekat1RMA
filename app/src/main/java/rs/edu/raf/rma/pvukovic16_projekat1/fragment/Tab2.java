@@ -1,5 +1,6 @@
 package rs.edu.raf.rma.pvukovic16_projekat1.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs.edu.raf.rma.pvukovic16_projekat1.R;
+import rs.edu.raf.rma.pvukovic16_projekat1.activity.DetailsActivity;
 import rs.edu.raf.rma.pvukovic16_projekat1.adapter.CategoryAdapter;
 import rs.edu.raf.rma.pvukovic16_projekat1.adapter.ExpenseAdapter;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Category;
@@ -39,6 +41,7 @@ public class Tab2 extends Fragment {
     private ArrayAdapter<Category> arrayAdapter;
     private List<Category> categoryList = new ArrayList<>();
 
+    private static final int DETAILS_ACTIVITY_REQUEST_CODE = 0;
 
     public static Tab2 newInstance() {
         Tab2 fragment = new Tab2();
@@ -101,14 +104,34 @@ public class Tab2 extends Fragment {
 
         expenseAdapter.setOnImageClickCallback(new ExpenseAdapter.OnImageClickCallback() {
             @Override
-            public void onImageClick() {
+            public void onImageClick(int position) {
+                Expense expense = expenseList.get(position);
 
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                intent.putExtra("expenseId", expense.getId());
+                intent.putExtra("expenseName", expense.getName());
+                intent.putExtra("expenseCost", expense.getCost());
+                intent.putExtra("expenseDate", expense.getDate());
+                intent.putExtra("expenseCategory", expense.getCategory().getName());
+
+                startActivityForResult(intent, DETAILS_ACTIVITY_REQUEST_CODE);
             }
         });
 
         recyclerView.setAdapter(expenseAdapter);
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == DETAILS_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == 1) {
+                mainViewModel.removeExpense(data.getIntExtra("expenseId", -1));
+            }
+        }
     }
 
 

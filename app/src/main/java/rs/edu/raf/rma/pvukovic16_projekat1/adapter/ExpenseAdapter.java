@@ -65,12 +65,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
 
     // Callback we use when user clicks on remove
     public interface OnItemRemoveCallback {
-        void onItemRemove(int position);
+        void onItemRemove(int id);
     }
 
     //Callback we use when user click on avatar avatarImage
     public interface OnImageClickCallback {
-        void onImageClick();
+        void onImageClick(int position);
     }
 
 
@@ -115,7 +115,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         if (mOnImageClickCallback != null) {
-                            mOnImageClickCallback.onImageClick();
+                            mOnImageClickCallback.onImageClick(position);
                         }
                     }
                 }
