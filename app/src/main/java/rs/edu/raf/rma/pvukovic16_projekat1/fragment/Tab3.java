@@ -22,6 +22,7 @@ import rs.edu.raf.rma.pvukovic16_projekat1.adapter.SumAdapter;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Category;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Expense;
 import rs.edu.raf.rma.pvukovic16_projekat1.model.Sum;
+import rs.edu.raf.rma.pvukovic16_projekat1.view.PercentageTextView;
 import rs.edu.raf.rma.pvukovic16_projekat1.viewmodel.MainViewModel;
 
 public class Tab3 extends Fragment {
@@ -31,6 +32,7 @@ public class Tab3 extends Fragment {
     private List<Sum> sumList = new ArrayList<>();
 
     private TextView ukupnoTv;
+    private PercentageTextView percentageTv;
 
     public static Tab3 newInstance() {
         Tab3 fragment = new Tab3();
@@ -57,6 +59,7 @@ public class Tab3 extends Fragment {
         recyclerView.setAdapter(sumAdapter);
 
         ukupnoTv = root.findViewById(R.id.t3_tv_ukupno);
+        percentageTv = root.findViewById(R.id.t3_ptv);
 
         return root;
     }
@@ -77,6 +80,7 @@ public class Tab3 extends Fragment {
                             all += s.getSum();
                         }
                         ukupnoTv.setText(getString(R.string.ukupno, all));
+                        percentageTv.setData(sumList);
                         sumAdapter.setData(sumList);
                     }
                 });
