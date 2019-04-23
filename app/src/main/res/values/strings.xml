@@ -11,4 +11,5 @@
     <string name="det_cat">Kategorija: %s</string>
     <string name="det_cost">Plaćeno %d dinara.</string>
     <string name="det_date">Datum: %s</string>
+    <string name="ukupno">Ukupno: %d</string>
 </resources>
