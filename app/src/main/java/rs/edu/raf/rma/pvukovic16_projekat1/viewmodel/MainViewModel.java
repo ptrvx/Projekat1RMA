@@ -26,7 +26,7 @@ public class MainViewModel extends ViewModel {
     List<Sum> sumList = new ArrayList<>();
 
     Category catFilter = null;
-    String filter = null;
+    String filter = "";
 
     public LiveData<List<Category>> getCategories() {
         return categories;
