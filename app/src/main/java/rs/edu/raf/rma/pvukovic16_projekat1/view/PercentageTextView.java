@@ -22,7 +22,7 @@ public class PercentageTextView extends AppCompatTextView {
 
     private int[] mForegroundCircleColor = {R.color.circle1, R.color.circle2, R.color.circle3};
     private int mBackgroundCircleColor = R.color.backgroundCircle;
-    private float mCircleStrokeWidthInPx = 34;
+    private float mCircleStrokeWidthInPx = 40;
 
     private RectF mRectF;
     private Paint mPaint;
@@ -53,6 +53,7 @@ public class PercentageTextView extends AppCompatTextView {
     public void setData(List<Sum> sums) {
         sumList.clear();
         sumList.addAll(sums);
+        ukupno = 0;
         for (Sum s : sumList) {
             ukupno += (float) s.getSum();
         }
@@ -71,7 +72,6 @@ public class PercentageTextView extends AppCompatTextView {
 
         super.onMeasure(newMeasureSpec, newMeasureSpec);
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -96,9 +96,10 @@ public class PercentageTextView extends AppCompatTextView {
 
         for (int i = 0; i < sumList.size(); ++i) {
             float number = sumList.get(i).getSum();
-            mPaint.setColor(getResources().getColor(mForegroundCircleColor[i % 3]));
             if (i == sumList.size() - 1)
                 mPaint.setColor(getResources().getColor(mBackgroundCircleColor));
+            else
+                mPaint.setColor(getResources().getColor(mForegroundCircleColor[i % 3]));
             float sweepAngle = number / ukupno * 360;
             canvas.drawArc(mRectF, startAngle, sweepAngle, false, mPaint);
             startAngle += sweepAngle;

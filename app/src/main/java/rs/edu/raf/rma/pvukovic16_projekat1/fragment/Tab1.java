@@ -70,6 +70,8 @@ public class Tab1 extends Fragment {
                 if (!name.equals("") && !cost.equals("") && cat != null) {
                     mainViewModel.addExpense(new Expense(Util.generateId(), name, Integer.parseInt(cost), cat));
                     Toast.makeText(root.getContext(), "Expense added: " + cost, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(root.getContext(), "Wrong input, expense not added.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
