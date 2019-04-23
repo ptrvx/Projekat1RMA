@@ -27,7 +27,7 @@ public class Sum {
     }
 
     public void update (int diff) {
-        sum += diff;
+        this.sum = this.sum + diff;
     }
 
 }

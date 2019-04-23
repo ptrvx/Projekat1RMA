@@ -94,17 +94,18 @@ public class PercentageTextView extends AppCompatTextView {
 
         float startAngle = 0;
 
-        for (int i = 0; i < sumList.size(); ++i) {
-            float number = sumList.get(i).getSum();
-            if (i == sumList.size() - 1)
-                mPaint.setColor(getResources().getColor(mBackgroundCircleColor));
-            else
-                mPaint.setColor(getResources().getColor(mForegroundCircleColor[i % 3]));
-            float sweepAngle = number / ukupno * 360;
-            canvas.drawArc(mRectF, startAngle, sweepAngle, false, mPaint);
-            startAngle += sweepAngle;
+        if (ukupno > 0) {
+            for (int i = 0; i < sumList.size(); ++i) {
+                float number = (float) sumList.get(i).getSum();
+                if (i == sumList.size() - 1)
+                    mPaint.setColor(getResources().getColor(mBackgroundCircleColor));
+                else
+                    mPaint.setColor(getResources().getColor(mForegroundCircleColor[i % 3]));
+                float sweepAngle = number / ukupno * 360;
+                canvas.drawArc(mRectF, startAngle, sweepAngle, false, mPaint);
+                startAngle += sweepAngle;
+            }
         }
-
     }
 
 

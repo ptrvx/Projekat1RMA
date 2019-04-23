@@ -55,7 +55,6 @@ public class SumAdapter extends RecyclerView.Adapter<SumAdapter.SumHolder> {
         result.dispatchUpdatesTo(this);
     }
 
-
     public class SumHolder extends RecyclerView.ViewHolder {
         TextView nameTv;
         TextView sumTv;

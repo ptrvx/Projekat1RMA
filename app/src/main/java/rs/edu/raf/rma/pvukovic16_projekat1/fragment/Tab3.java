@@ -64,7 +64,6 @@ public class Tab3 extends Fragment {
         return root;
     }
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

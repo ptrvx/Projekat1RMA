@@ -30,7 +30,7 @@ public class SumDiffCallback extends DiffUtil.Callback {
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         Sum oldCat = oldList.get(oldItemPosition);
         Sum newCat = newList.get(newItemPosition);
-        return oldCat.getCategory().getId() == newCat.getCategory().getId() && oldCat.getSum() == newCat.getSum();
+        return oldCat == newCat || (oldCat.getCategory().getId() == newCat.getCategory().getId() && oldCat.getSum() == newCat.getSum());
     }
 
     @Override
